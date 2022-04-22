@@ -1,0 +1,6 @@
+framework module Pods_PDFViewer {
+  umbrella header "Pods-PDFViewer-umbrella.h"
+
+  export *
+  module * { export * }
+}
