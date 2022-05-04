@@ -13,6 +13,8 @@ import SeeSo
 
 var pdfView: PDFView? = nil
 var checkedMiddle = true
+var scaleZoomInRate = 1.0
+var checkedZoomedIn = false
 
 class PDFViewerController: UIViewController {
     var storage = UserDefaults.standard
@@ -46,7 +48,7 @@ class PDFViewerController: UIViewController {
     }
     
 
-    let licenseKey : String = "dev_nsv6fgmjqt8e6uu2bxv12oyup6ft80qwua6rfj0g" // Please enter the key value for development issued by the SeeSo.io
+    let licenseKey : String = "dev_jartgjf40yfbkfbxb55ggsk8pkuqjd6x2mo79ycy" // Please enter the key value for development issued by the SeeSo.io
     
     //
     var frame : Int = 0
@@ -337,6 +339,8 @@ extension PDFViewerController : GazeDelegate {
     func onGaze(gazeInfo: GazeInfo) {
         
 //        var checkedMiddle = true
+//        let pdfViewPage = PDFView(frame: view.bounds)
+        
         
         //During the calibration process, the gaze UI is not displayed.
         if tracker != nil && tracker!.isCalibrating() {
@@ -349,18 +353,62 @@ extension PDFViewerController : GazeDelegate {
                     self.gazePointView?.moveView(x: gazeInfo.x, y: gazeInfo.y)
                    
                     
-                    if (gazeInfo.y < 620 && gazeInfo.y > 150){
-                        checkedMiddle = true
+//                    if (gazeInfo.y < 620 && gazeInfo.y > 150){
+//                        checkedMiddle = true
+//                    }
+//
+//                    if (gazeInfo.y > 620){
+//                        if(checkedMiddle == true){
+//                            pdfView?.goToNextPage(pdfView.self)
+//                            checkedMiddle = false;
+//                            print("CheckedMiddle: \(checkedMiddle)")
+//                        }
+//                    }
+                       
+                    //SCROLLING DOWN
+                    if (gazeInfo.y > 500){
+                        pdfView?.scrollSelectionToVisible(pdfView?.documentView!.center.y = (pdfView?.documentView!.center.y)! - 5)
                     }
-                
-                    if (gazeInfo.y > 620){
-                        if(checkedMiddle == true){
-                            pdfView?.goToNextPage(pdfView.self)
-                            checkedMiddle = false;
-                            print("CheckedMiddle: \(checkedMiddle)")
+                    
+                    //SCROLLING UP
+                    if (gazeInfo.y < 100){
+                        pdfView?.scrollSelectionToVisible(pdfView?.documentView!.center.y = (pdfView?.documentView!.center.y)! + 5)
+                    }
+                    
+                    //SCROLLING RIGHT
+                    if (gazeInfo.x > 200 && gazeInfo.y > 150 && checkedZoomedIn == true){
+                        pdfView?.scrollSelectionToVisible(pdfView?.documentView!.center.x = (pdfView?.documentView!.center.x)! - 1.5)
+                    }
+                    
+                    //SCROLLING LEFT
+                    if (gazeInfo.x < 200 && gazeInfo.y > 150 && checkedZoomedIn == true){
+                        pdfView?.scrollSelectionToVisible(pdfView?.documentView!.center.x = (pdfView?.documentView!.center.x)! + 1.5)
+                    }
+                    
+                    
+                    //1.  we need to border to stop it from scrolling up and down past the document
+                    
+                    //ZOOM IN
+                    if (gazeInfo.x > 300 && gazeInfo.y < 100){
                         
-                        }
+                       // pdfView?.scaleFactor = pdfView!.scale
+                        pdfView?.maxScaleFactor = scaleZoomInRate
+                        checkedZoomedIn = true
+                        pdfView?.zoomIn(pdfView.self)
+                        
                     }
+                    
+                    //ZOOM OUT
+                    if (gazeInfo.x < 100 && gazeInfo.y < 100){
+                        
+                       pdfView?.scaleFactor = pdfView!.scaleFactorForSizeToFit
+                        checkedZoomedIn = false
+                       
+                    //pdfView?.minScaleFactor = 0
+                        
+                        pdfView?.zoomOut(pdfView.self)
+                    }
+                    
                     
                     
                     
