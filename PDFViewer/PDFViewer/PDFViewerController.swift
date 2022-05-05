@@ -13,7 +13,8 @@ import SeeSo
 
 var pdfView: PDFView? = nil
 var checkedMiddle = true
-var scaleZoomInRate = 1.0
+var scaleZoomInRate = 2.0
+var scaleZoomOutRate = 1.0
 var checkedZoomedIn = false
 
 class PDFViewerController: UIViewController {
@@ -366,12 +367,12 @@ extension PDFViewerController : GazeDelegate {
 //                    }
                        
                     //SCROLLING DOWN
-                    if (gazeInfo.y > 500){
+                    if (gazeInfo.y > 620){
                         pdfView?.scrollSelectionToVisible(pdfView?.documentView!.center.y = (pdfView?.documentView!.center.y)! - 5)
                     }
                     
                     //SCROLLING UP
-                    if (gazeInfo.y < 100){
+                    if (gazeInfo.y < 30){
                         pdfView?.scrollSelectionToVisible(pdfView?.documentView!.center.y = (pdfView?.documentView!.center.y)! + 5)
                     }
                     
@@ -379,11 +380,11 @@ extension PDFViewerController : GazeDelegate {
                     if (gazeInfo.x > 200 && gazeInfo.y > 150 && checkedZoomedIn == true){
                         pdfView?.scrollSelectionToVisible(pdfView?.documentView!.center.x = (pdfView?.documentView!.center.x)! - 1.5)
                     }
-                    
-                    //SCROLLING LEFT
-                    if (gazeInfo.x < 200 && gazeInfo.y > 150 && checkedZoomedIn == true){
-                        pdfView?.scrollSelectionToVisible(pdfView?.documentView!.center.x = (pdfView?.documentView!.center.x)! + 1.5)
-                    }
+//
+//                    //SCROLLING LEFT
+//                    if (gazeInfo.x < 200 && gazeInfo.y > 150 && checkedZoomedIn == true){
+//                        pdfView?.scrollSelectionToVisible(pdfView?.documentView!.center.x = (pdfView?.documentView!.center.x)! + 1.5)
+//                    }
                     
                     
                     
@@ -396,23 +397,20 @@ extension PDFViewerController : GazeDelegate {
                     //1.  we need to border to stop it from scrolling up and down past the document
                     
                     //ZOOM IN
-                    if (gazeInfo.x > 300 && gazeInfo.y < 100){
-                        
-                       // pdfView?.scaleFactor = pdfView!.scale
+                    if (gazeInfo.x > 900 && gazeInfo.y < 100){
+
+                        //pdfView?.scaleFactor = pdfView!.scale
                         pdfView?.maxScaleFactor = scaleZoomInRate
                         checkedZoomedIn = true
                         pdfView?.zoomIn(pdfView.self)
-                        
+
                     }
-                    
+
                     //ZOOM OUT
                     if (gazeInfo.x < 100 && gazeInfo.y < 100){
-                        
-                       pdfView?.scaleFactor = pdfView!.scaleFactorForSizeToFit
-                        checkedZoomedIn = false
-                       
-                    //pdfView?.minScaleFactor = 0
-                        
+//
+                        pdfView?.minScaleFactor = scaleZoomOutRate
+//
                         pdfView?.zoomOut(pdfView.self)
                     }
                     
