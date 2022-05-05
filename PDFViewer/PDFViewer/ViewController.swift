@@ -10,14 +10,17 @@ import MobileCoreServices
 import PDFKit
 import AVKit
 import SeeSo
-
+import Parse
 
 
 //let UserDefaults = UserDefaults.default
 
 class ViewController: UIViewController, UIDocumentPickerDelegate{
     let storage = UserDefaults.standard
-    
+    var pdfList = [PFObject]()
+    var segmentedPDFToJPGList = [UIImage]()
+    var imageIndexCur = 1
+    var pulledJPGList = [UIImage]()
     @IBOutlet weak var name: UILabel!
     
     
@@ -83,4 +86,125 @@ class ViewController: UIViewController, UIDocumentPickerDelegate{
         }
     }
     
+    @IBAction func uploadPDF(_ sender: Any) {
+        let pdfURL = storage.url(forKey: "PDFURL")!
+                
+            let pageThree = thumbnailFromPdf(withUrl: pdfURL, pageNumber: 4)
+            let doc = PDFDocument(url: pdfURL)
+                
+        //        var segmentedPDFImages = [UIImage]()
+            for i in 1...doc!.pageCount{
+                segmentedPDFToJPGList.append(thumbnailFromPdf(withUrl: pdfURL, pageNumber: i)!)
+            }
+            print("Size of segmentedPDFToPNG: \(segmentedPDFToJPGList.count)")
+                
+                
+//            let pageFour = makeThumbnail(pdfDocument: doc, page:0)
+              
+            var stringVersion = [PFFileObject]()
+            for i in 0...segmentedPDFToJPGList.count-1 {
+                let imageData = segmentedPDFToJPGList[i].pngData()
+                let file = PFFileObject(name: "image.png", data: imageData!)!
+                stringVersion.append(file)
+            }
+            print("Size of stringVersion: \(stringVersion.count)")
+                
+            let parseObject = PFObject(className: "PDF")
+            parseObject["pdfArr"] = stringVersion
+                
+                
+                
+            parseObject.saveInBackground {
+                (success: Bool, error: Error?) in
+                if (success) {
+                    print("Success")
+                } else {
+                    print("Fail")
+                    print("Error: \(error)")
+                }
+
+            }
+    }
+    
+    @IBAction func diplayFunc(_ sender: Any) {
+        let pdfDocument = PDFDocument()
+                
+        var url = URL(string: "https://www.zerotoappstore.com/")
+        var query = PFQuery(className: "PDF")
+        query.includeKeys(["ACL", "pdfArr"])
+        query.limit = 5
+        query.findObjectsInBackground { (pdfArr, error) in
+        if pdfArr != nil{
+            let a = pdfArr![4]
+            let b = a["pdfArr"] as! [PFFileObject]
+            for i in 0...b.count-1 {
+                            
+                let c = b[i].url!
+                let d = URL(string: c)!
+                if let data = try? Data(contentsOf: d) {
+                    if let image = UIImage(data: data) {
+                        DispatchQueue.main.async {
+                            let pdfPage = PDFPage(image: image)
+                                    
+                            pdfDocument.insert(pdfPage!, at: i)
+                        }
+                    }
+                }
+            }
+                           
+                        print(pdfArr!)
+                        print("pulledJPGList count: \(self.pulledJPGList.count)")
+                    }else{
+                        print("Error: \(error)")
+                    }
+                    
+        }
+                
+                
+                
+//                var example = PDFInfo()
+//                example.pdfFile = pdfDocument
+        //
+        //        //To display for testing purposes
+                pdfView = PDFView(frame: self.view.bounds)
+                pdfView!.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+                self.view.addSubview(pdfView!)
+        //
+                pdfView!.autoScales = true
+        //
+                pdfView!.document = pdfDocument
+    }
+    
+    func thumbnailFromPdf(withUrl url:URL, pageNumber:Int, width: CGFloat = 240) -> UIImage? {
+            guard let pdf = CGPDFDocument(url as CFURL),
+                let page = pdf.page(at: pageNumber)
+                else {
+                    return nil
+            }
+
+            var pageRect = page.getBoxRect(.mediaBox)
+            let pdfScale = width / pageRect.size.width
+            pageRect.size = CGSize(width: pageRect.size.width*pdfScale, height: pageRect.size.height*pdfScale)
+            pageRect.origin = .zero
+
+            UIGraphicsBeginImageContext(pageRect.size)
+            let context = UIGraphicsGetCurrentContext()!
+
+            // White BG
+            context.setFillColor(UIColor.white.cgColor)
+            context.fill(pageRect)
+            context.saveGState()
+
+            // Next 3 lines makes the rotations so that the page look in the right direction
+            context.translateBy(x: 0.0, y: pageRect.size.height)
+            context.scaleBy(x: 1.0, y: -1.0)
+            context.concatenate(page.getDrawingTransform(.mediaBox, rect: pageRect, rotate: 0, preserveAspectRatio: true))
+
+            context.drawPDFPage(page)
+            context.restoreGState()
+
+            let image = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            return image
+    }
 }
