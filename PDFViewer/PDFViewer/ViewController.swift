@@ -15,9 +15,19 @@ import Parse
 
 //let UserDefaults = UserDefaults.default
 
-class ViewController: UIViewController, UIDocumentPickerDelegate{
+class ViewController: UIViewController, UIDocumentPickerDelegate, UICollectionViewDelegate, UICollectionViewDataSource{
+    
+    
+    
+    
+    
+    
+    @IBOutlet weak var pdfListView: UICollectionView!
+    
     let storage = UserDefaults.standard
-    var pdfList = [PFObject]()
+//    var pdfList = [PFObject]()
+    var pdfList = [PFFileObject]()
+
     var segmentedPDFToJPGList = [UIImage]()
     var imageIndexCur = 1
     var pulledJPGList = [UIImage]()
@@ -27,15 +37,44 @@ class ViewController: UIViewController, UIDocumentPickerDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        pdfListView.dataSource = self
+        pdfListView.delegate = self
+        let thisUser = PFUser.current()
         
-        //let query = 
+        //let query =
         
-        
-        
-        
-
-        // Do any additional setup after loading the view.
+        var query = PFQuery(className: "PDF")
+        query.includeKeys(["ACL", "pdfArr"])
+        query.limit = 5
+        query.findObjectsInBackground { (pdfArr, error) in
+        if pdfArr != nil{
+            let a = pdfArr![4]
+            let b = a["pdfArr"] as! [PFFileObject]
+            self.pdfList = b
+            
+            print("pdfList size:\(self.pdfList.count)")
+//            for i in 0...b.count-1 {
+//
+//                let c = b[i].url!
+//                let d = URL(string: c)!
+//                if let data = try? Data(contentsOf: d) {
+//                    if let image = UIImage(data: data) {
+//                        DispatchQueue.main.async {
+//                            let pdfPage = PDFPage(image: image)
+//
+//                            pdfDocument.insert(pdfPage!, at: i)
+//                        }
+//                    }
+//                }
+        } else {
+            print("Error: \(error)")
+        }
+        }
     }
+        
+        
+        
+        
     @IBAction func importFile(_ sender: Any) {
         let documentPicker = UIDocumentPickerViewController(documentTypes: [kUTTypePDF as String], in: .import)
         documentPicker.delegate = self
@@ -207,4 +246,17 @@ class ViewController: UIViewController, UIDocumentPickerDelegate{
             UIGraphicsEndImageContext()
             return image
     }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return pdfList.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PDFCollectionViewCell", for: indexPath) as! PDFCollectionViewCell
+        return cell
+    }
+    
+    
+    
+    
 }
