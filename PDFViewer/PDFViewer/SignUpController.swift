@@ -15,6 +15,10 @@ class SignUpController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var passwordConfirmationTextField: UITextField!
     @IBOutlet weak var signUp: UIButton!
     
+    @IBOutlet weak var image: UIImageView!
+    @IBOutlet weak var welcome: UILabel!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,6 +40,8 @@ class SignUpController: UIViewController, UITextFieldDelegate {
         view.addSubview(passwordTextField)
         view.addSubview(passwordConfirmationTextField)
         view.addSubview(signUp)
+        view.addSubview(welcome)
+        view.addSubview(image)
         
         // Do any additional setup after loading the view.
     }
