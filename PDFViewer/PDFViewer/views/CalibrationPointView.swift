@@ -11,11 +11,11 @@ import UIKit
 class CalibrationPointView : UILabel {
     override init(frame: CGRect) {
         super.init(frame : frame)
-        layer.cornerRadius = frame.width/2
-        layer.borderColor = UIColor.red.cgColor
+        layer.cornerRadius = frame.width/4
+    //layer.borderColor = UIColor.blue.cgColor
         layer.borderWidth = 2
         textAlignment = .center
-        textColor = .red
+        textColor = .blue
         adjustsFontSizeToFitWidth = true
         text = "0%"
     }
