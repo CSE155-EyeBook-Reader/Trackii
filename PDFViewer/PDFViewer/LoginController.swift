@@ -8,20 +8,50 @@
 import UIKit
 import Parse
 
-class LoginController: UIViewController {
+class LoginController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
+    @IBOutlet weak var signIn: UIButton!
+    @IBOutlet weak var signUp: UIButton!
+    @IBOutlet weak var bannerImage: UIImageView!
+    @IBOutlet weak var userIcon: UIImageView!
+    @IBOutlet weak var passwordIcon: UIImageView!
+    @IBOutlet weak var quote: UILabel!
     
+    @IBOutlet weak var newAccount: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        usernameTextField.delegate = self
+        passwordTextField.delegate = self
+        
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = view.bounds
+        gradientLayer.colors = [
+            UIColor.systemBlue.cgColor,
+            UIColor.systemTeal.cgColor,
+        ]
+        view.layer.addSublayer(gradientLayer)
+        
+        //usernameTextField.tintColor = UIColor.systemBrown
+        view.addSubview(usernameTextField)
+        view.addSubview(passwordTextField)
+        view.addSubview(signIn)
+        view.addSubview(signUp)
+        view.addSubview(bannerImage)
+        view.addSubview(userIcon)
+        view.addSubview(passwordIcon)
+        view.addSubview(quote)
+        view.addSubview(newAccount)
 
         // Do any additional setup after loading the view.
     }
     @IBAction func onSignIn(_ sender: Any) {
         let username = usernameTextField.text!
         let password = passwordTextField.text!
+        
         
         PFUser.logInWithUsername(inBackground: username, password: password) {
             (user, error) in
@@ -32,6 +62,15 @@ class LoginController: UIViewController {
             }
         }
     }
+    
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        usernameTextField.resignFirstResponder()
+        passwordTextField.resignFirstResponder()
+        return true
+    }
+
+    //view.addSubview(onSignIn(_ sender: Any))
     
 
     /*

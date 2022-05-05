@@ -8,15 +8,35 @@
 import UIKit
 import Parse
 
-class SignUpController: UIViewController {
+class SignUpController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var passwordConfirmationTextField: UITextField!
+    @IBOutlet weak var signUp: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        nameTextField.delegate = self
+        usernameTextField.delegate = self
+        passwordTextField.delegate = self
+        passwordConfirmationTextField.delegate = self
+        
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = view.bounds
+        gradientLayer.colors = [
+            UIColor.systemBlue.cgColor,
+            UIColor.systemTeal.cgColor,
+        ]
+        view.layer.addSublayer(gradientLayer)
+        
+        view.addSubview(nameTextField)
+        view.addSubview(usernameTextField)
+        view.addSubview(passwordTextField)
+        view.addSubview(passwordConfirmationTextField)
+        view.addSubview(signUp)
+        
         // Do any additional setup after loading the view.
     }
     @IBAction func onSignUp(_ sender: Any) {
@@ -40,6 +60,16 @@ class SignUpController: UIViewController {
         }
     }
     
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        nameTextField.resignFirstResponder()
+        usernameTextField.resignFirstResponder()
+        passwordTextField.resignFirstResponder()
+        passwordConfirmationTextField.resignFirstResponder()
+        
+        
+        return true
+    }
 
     /*
     // MARK: - Navigation

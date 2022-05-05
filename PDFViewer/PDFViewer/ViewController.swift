@@ -17,8 +17,19 @@ import SeeSo
 
 class ViewController: UIViewController, UIDocumentPickerDelegate{
     let storage = UserDefaults.standard
+    
+    @IBOutlet weak var name: UILabel!
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //let query = 
+        
+        
+        
+        
 
         // Do any additional setup after loading the view.
     }

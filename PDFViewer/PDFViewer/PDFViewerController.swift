@@ -54,10 +54,10 @@ class PDFViewerController: UIViewController {
     var frame : Int = 0
     var lastTime : Double = 0
     enum AppState : String {
-        case Disable = "Disable" // User denied access to the camera.
-        case Idle = "Idle" // User has allowed access to the camera.
-        case Initailzed = "Initalized" // GazeTracker has been successfully created.
-        case Tracking = "Tracking" // Gaze Tracking state.
+        case Disable = " " // User denied access to the camera.
+        case Idle = "" // User has allowed access to the camera.
+        case Initailzed = "  " // GazeTracker has been successfully created.
+        case Tracking = "   " // Gaze Tracking state.
         case Calibrating = "Calibrating" // It is being calibrated.
     }
     
@@ -153,7 +153,7 @@ class PDFViewerController: UIViewController {
                     self.enableSwitch(select: self.userStatusSwitch)
                 case .Initailzed:
                     self.setInitializedStateUIComponents()
-                    self.tracker?.removeCameraPreview()
+                    //self.tracker?.removeCameraPreview()
                     self.disableLoadBtn()
                     self.disableSaveBtn()
                 case .Tracking:
@@ -318,7 +318,7 @@ extension PDFViewerController : InitializationDelegate {
 extension PDFViewerController : StatusDelegate {
     func onStarted() {
         curState = .Tracking
-        self.tracker?.setCameraPreview(preview: self.preview)
+        //self.tracker?.setCameraPreview(preview: self.preview)
         if userStatusOn {
             showUserStatusLabel()
         }
@@ -328,7 +328,7 @@ extension PDFViewerController : StatusDelegate {
         setStatusLableText(contents: "onStopped : \(error.description)")
         resetSwitch(select: startTrackingSwitch)
         self.enableSwitch(select: startTrackingSwitch)
-        self.tracker?.removeCameraPreview()
+        //self.tracker?.removeCameraPreview()
         DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
             self.curState = .Initailzed
         })
@@ -384,6 +384,13 @@ extension PDFViewerController : GazeDelegate {
                     if (gazeInfo.x < 200 && gazeInfo.y > 150 && checkedZoomedIn == true){
                         pdfView?.scrollSelectionToVisible(pdfView?.documentView!.center.x = (pdfView?.documentView!.center.x)! + 1.5)
                     }
+                    
+                    
+                    
+                    
+                    
+                    
+                    
                     
                     
                     //1.  we need to border to stop it from scrolling up and down past the document
@@ -468,11 +475,11 @@ extension PDFViewerController {
     
     private func initViewComponents(){
         initStatusLabel()
-        initModeUI()
+        //initModeUI()
         initInitTrackerUI()
         initStartTrackingUI()
         initGazePointView()
-        initGazeFilterUI()
+        //initGazeFilterUI()
         initStartCalibrationUI()
         initCalibrationPointView()
         initCalibrationModeUI()
@@ -490,19 +497,19 @@ extension PDFViewerController {
         self.view.addSubview(statusLabel)
     }
     
-    private func initModeUI(){
-        userStatusSwitch.frame.size = CGSize(width: 50, height: 50)
-        userStatusSwitch.frame.origin = CGPoint(x: self.view.frame.width - 60, y: self.view.frame.height/2 - 140)
-        userStatusSwitch.addTarget(self, action: #selector(onClickSwitch(sender:)), for: .valueChanged)
-        self.view.addSubview(userStatusSwitch)
-        
-        userStatusSwitchLabel.frame.size = CGSize(width: 150, height: userStatusSwitch.frame.height)
-        userStatusSwitchLabel.frame.origin = CGPoint(x: userStatusSwitch.frame.minX - (userStatusSwitchLabel.frame.width + 5), y: userStatusSwitch.frame.minY)
-        userStatusSwitchLabel.text = "UserStatus"
-        userStatusSwitchLabel.textColor = UIColor.blue
-        userStatusSwitchLabel.textAlignment = .center
-        self.view.addSubview(userStatusSwitchLabel)
-    }
+//    private func initModeUI(){
+//        userStatusSwitch.frame.size = CGSize(width: 50, height: 50)
+//        userStatusSwitch.frame.origin = CGPoint(x: self.view.frame.width - 60, y: self.view.frame.height/2 - 140)
+//        userStatusSwitch.addTarget(self, action: #selector(onClickSwitch(sender:)), for: .valueChanged)
+//        self.view.addSubview(userStatusSwitch)
+//
+//        userStatusSwitchLabel.frame.size = CGSize(width: 150, height: userStatusSwitch.frame.height)
+//        userStatusSwitchLabel.frame.origin = CGPoint(x: userStatusSwitch.frame.minX - (userStatusSwitchLabel.frame.width + 5), y: userStatusSwitch.frame.minY)
+//        userStatusSwitchLabel.text = "UserStatus"
+//        userStatusSwitchLabel.textColor = UIColor.blue
+//        userStatusSwitchLabel.textAlignment = .center
+//        self.view.addSubview(userStatusSwitchLabel)
+//    }
     
     private func initInitTrackerUI(){
         initTrackerSwitch.frame.size = CGSize(width: 50, height: 50)
@@ -512,7 +519,7 @@ extension PDFViewerController {
         
         initTrackerLabel.frame.size = CGSize(width: 150, height: initTrackerSwitch.frame.height)
         initTrackerLabel.frame.origin = CGPoint(x: initTrackerSwitch.frame.minX - (initTrackerLabel.frame.width + 5), y: initTrackerSwitch.frame.minY)
-        initTrackerLabel.text = "InitGazeTracker"
+        initTrackerLabel.text = "Use Eye Tracker"
         initTrackerLabel.textColor = UIColor.blue
         initTrackerLabel.textAlignment = .center
         self.view.addSubview(initTrackerLabel)
@@ -534,7 +541,7 @@ extension PDFViewerController {
         
         startTrackingLabel.frame.size = CGSize(width: 150, height: startTrackingSwitch.frame.height)
         startTrackingLabel.frame.origin = CGPoint(x: startTrackingSwitch.frame.minX - (startTrackingLabel.frame.width + 5), y: startTrackingSwitch.frame.minY)
-        startTrackingLabel.text = "Tracking"
+        startTrackingLabel.text = "Start Tracking"
         startTrackingLabel.textColor = UIColor.blue
         startTrackingLabel.textAlignment = .center
         self.view.addSubview(startTrackingLabel)
@@ -542,19 +549,19 @@ extension PDFViewerController {
         
     }
     
-    private func initGazeFilterUI(){
-        gazeFilterSwitch.frame.size = CGSize(width: 50, height: 50)
-        gazeFilterSwitch.frame.origin = CGPoint(x: self.view.frame.width - 60, y: self.view.frame.height/2 + 40)
-        gazeFilterSwitch.addTarget(self, action: #selector(onClickSwitch(sender:)), for: .valueChanged)
-        self.view.addSubview(gazeFilterSwitch)
-        
-        gazeFilterLabel.frame.size = CGSize(width: 150, height: gazeFilterSwitch.frame.height)
-        gazeFilterLabel.frame.origin = CGPoint(x: gazeFilterSwitch.frame.minX - (startTrackingLabel.frame.width + 5), y: gazeFilterSwitch.frame.minY)
-        gazeFilterLabel.text = "Filtering"
-        gazeFilterLabel.textColor = UIColor.blue
-        gazeFilterLabel.textAlignment = .center
-        self.view.addSubview(gazeFilterLabel)
-    }
+//    private func initGazeFilterUI(){
+//        gazeFilterSwitch.frame.size = CGSize(width: 50, height: 50)
+//        gazeFilterSwitch.frame.origin = CGPoint(x: self.view.frame.width - 60, y: self.view.frame.height/2 + 40)
+//        gazeFilterSwitch.addTarget(self, action: #selector(onClickSwitch(sender:)), for: .valueChanged)
+//        self.view.addSubview(gazeFilterSwitch)
+//
+//        gazeFilterLabel.frame.size = CGSize(width: 150, height: gazeFilterSwitch.frame.height)
+//        gazeFilterLabel.frame.origin = CGPoint(x: gazeFilterSwitch.frame.minX - (startTrackingLabel.frame.width + 5), y: gazeFilterSwitch.frame.minY)
+//        gazeFilterLabel.text = "Filtering"
+//        gazeFilterLabel.textColor = UIColor.blue
+//        gazeFilterLabel.textAlignment = .center
+//        self.view.addSubview(gazeFilterLabel)
+//    }
     
     private func initGazePointView(){
         self.gazePointView = GazePointView(frame: self.view.bounds)
