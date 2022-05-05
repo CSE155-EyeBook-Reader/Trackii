@@ -66,6 +66,7 @@ class ViewController: UIViewController, UIDocumentPickerDelegate, UICollectionVi
 //                        }
 //                    }
 //                }
+            self.pdfListView.reloadData()
         } else {
             print("Error: \(error)")
         }
@@ -248,11 +249,23 @@ class ViewController: UIViewController, UIDocumentPickerDelegate, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return pdfList.count
+        print("In collectionView (pdfLIst.count): \(self.pdfList.count)")
+        return self.pdfList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PDFCollectionViewCell", for: indexPath) as! PDFCollectionViewCell
+        let singlePDF = pdfList[indexPath.item].url!
+        let thumbnailURL = URL(string: singlePDF)!
+        
+        if let data = try? Data(contentsOf: thumbnailURL) {
+            if let image = UIImage(data: data) {
+                DispatchQueue.main.async {
+                    cell.pdfThumbnail.image = image
+                }
+            }
+        }
+        
         return cell
     }
     
