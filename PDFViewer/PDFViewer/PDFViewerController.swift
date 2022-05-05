@@ -377,22 +377,14 @@ extension PDFViewerController : GazeDelegate {
                     }
                     
                     //SCROLLING RIGHT
-                    if (gazeInfo.x > 200 && gazeInfo.y > 150 && checkedZoomedIn == true){
+                    if (gazeInfo.x > 750 && (gazeInfo.y > 150 && gazeInfo.y < 500) && checkedZoomedIn == true){
                         pdfView?.scrollSelectionToVisible(pdfView?.documentView!.center.x = (pdfView?.documentView!.center.x)! - 1.5)
                     }
 //
-//                    //SCROLLING LEFT
-//                    if (gazeInfo.x < 200 && gazeInfo.y > 150 && checkedZoomedIn == true){
-//                        pdfView?.scrollSelectionToVisible(pdfView?.documentView!.center.x = (pdfView?.documentView!.center.x)! + 1.5)
-//                    }
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
+                    //SCROLLING LEFT
+                    if (gazeInfo.x < 200 && (gazeInfo.y > 150 && gazeInfo.y < 500) && checkedZoomedIn == true){
+                        pdfView?.scrollSelectionToVisible(pdfView?.documentView!.center.x = (pdfView?.documentView!.center.x)! + 1.5)
+                    }
                     
                     //1.  we need to border to stop it from scrolling up and down past the document
                     
