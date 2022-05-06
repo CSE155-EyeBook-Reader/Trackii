@@ -2,7 +2,6 @@
 //  UserStatusLabel.swift
 //  SeeSoSample
 //
-//  Created by david on 2021/05/25.
 //  Copyright © 2021 VisaulCamp. All rights reserved.
 //
 

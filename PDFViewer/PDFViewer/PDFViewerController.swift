@@ -4,6 +4,10 @@
 //
 //  Created by Jonathan Ballona Sanchez on 4/9/22.
 //
+//  SeeSo Framework is used and own by Copyright
+//  Copyright © 2021 VisaulCamp. All rights reserved.
+//
+//
 
 import UIKit
 import MobileCoreServices
