@@ -13,7 +13,6 @@ import SeeSo
 import Parse
 
 
-//let UserDefaults = UserDefaults.default
 
 class ViewController: UIViewController, UIDocumentPickerDelegate, UICollectionViewDelegate, UICollectionViewDataSource{
     
@@ -38,7 +37,6 @@ class ViewController: UIViewController, UIDocumentPickerDelegate, UICollectionVi
     
     let storage = UserDefaults.standard
     var pdfList = [PFObject]()
-//    var pdfList = [PFFileObject]()
 
     var segmentedPDFToJPGList = [UIImage]()
     var imageIndexCur = 1
@@ -71,6 +69,8 @@ class ViewController: UIViewController, UIDocumentPickerDelegate, UICollectionVi
         view.addSubview(myCollectionTitle)
         
         
+        //Uncomment to mess with constraints
+        
         
 //        let layout = pdfListView.collectionViewLayout as! UICollectionViewFlowLayout
 //
@@ -83,8 +83,8 @@ class ViewController: UIViewController, UIDocumentPickerDelegate, UICollectionVi
         
         
         let thisUser = PFUser.current()
+        self.userName.text = thisUser?.username
         
-        //let query =
         
         var query = PFQuery(className: "PDF")
         query.includeKeys(["ACL", "pdfArr"])
@@ -93,23 +93,9 @@ class ViewController: UIViewController, UIDocumentPickerDelegate, UICollectionVi
         if pdfArr != nil{
             let a = pdfArr![14]
             let b = a["pdfArr"] as! [PFFileObject]
-//            self.pdfList = b
             self.pdfList = pdfArr!
             
             print("pdfList size:\(self.pdfList.count)")
-//            for i in 0...b.count-1 {
-//
-//                let c = b[i].url!
-//                let d = URL(string: c)!
-//                if let data = try? Data(contentsOf: d) {
-//                    if let image = UIImage(data: data) {
-//                        DispatchQueue.main.async {
-//                            let pdfPage = PDFPage(image: image)
-//
-//                            pdfDocument.insert(pdfPage!, at: i)
-//                        }
-//                    }
-//                }
             self.pdfListView.reloadData()
         } else {
             print("Error: \(error)")
@@ -161,13 +147,10 @@ class ViewController: UIViewController, UIDocumentPickerDelegate, UICollectionVi
         let sandboxFileURL = dir.appendingPathComponent(selectedFileURL!.lastPathComponent)
         
         if FileManager.default.fileExists(atPath: sandboxFileURL.path){
-            
             print("Already exists! Do not copy, but store URL")
             storage.set(urls.first, forKey: "PDFURL")
-            
         } else {
             do {
-                
                 try FileManager.default.copyItem(at: selectedFileURL!, to: sandboxFileURL)
                 storage.set(urls.first, forKey: "PDFURL")
                 print("Copied file")
@@ -222,56 +205,7 @@ class ViewController: UIViewController, UIDocumentPickerDelegate, UICollectionVi
             }
     }
     
-//    @IBAction func diplayFunc(_ sender: Any) {
-//        let pdfDocument = PDFDocument()
-//
-//        var url = URL(string: "https://www.zerotoappstore.com/")
-//        var query = PFQuery(className: "PDF")
-//        query.includeKeys(["ACL", "pdfArr"])
-//        query.limit = 25
-//        query.findObjectsInBackground { (pdfArr, error) in
-//        if pdfArr != nil{
-//            let a = pdfArr![14]
-//            let b = a["pdfArr"] as! [PFFileObject]
-//            for i in 0...b.count-1 {
-//
-//                let c = b[i].url!
-//                let d = URL(string: c)!
-//                if let data = try? Data(contentsOf: d) {
-//                    if let image = UIImage(data: data) {
-//                        DispatchQueue.main.async {
-//                            let pdfPage = PDFPage(image: image)
-//
-//                            pdfDocument.insert(pdfPage!, at: i)
-//                        }
-//                    }
-//                }
-//            }
-//
-//                        print(pdfArr!)
-//                        print("pulledJPGList count: \(self.pulledJPGList.count)")
-//                    }else{
-//                        print("Error: \(error)")
-//                    }
-//
-//        }
-//
-//
-//
-////                var example = PDFInfo()
-////                example.pdfFile = pdfDocument
-//        //
-//        //        //To display for testing purposes
-//                pdfView = PDFView(frame: self.view.bounds)
-//                pdfView!.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-//                self.view.addSubview(pdfView!)
-//        //
-//                pdfView!.autoScales = true
-//        //
-//                pdfView!.document = pdfDocument
-//    }
-    
-//    func thumbnailFromPdf(withUrl url:URL, pageNumber:Int, width: CGFloat = 240) -> UIImage? {
+    // This segment of code until line 244 (reference 6 from report).
     func thumbnailFromPdf(withUrl url:URL, pageNumber:Int, width: CGFloat = 1000) -> UIImage? {
 
             guard let pdf = CGPDFDocument(url as CFURL),
@@ -279,7 +213,7 @@ class ViewController: UIViewController, UIDocumentPickerDelegate, UICollectionVi
                 else {
                     return nil
             }
-
+            
             var pageRect = page.getBoxRect(.mediaBox)
             let pdfScale = width / pageRect.size.width
             pageRect.size = CGSize(width: pageRect.size.width*pdfScale, height: pageRect.size.height*pdfScale)
@@ -288,12 +222,10 @@ class ViewController: UIViewController, UIDocumentPickerDelegate, UICollectionVi
             UIGraphicsBeginImageContext(pageRect.size)
             let context = UIGraphicsGetCurrentContext()!
 
-            // White BG
             context.setFillColor(UIColor.white.cgColor)
             context.fill(pageRect)
             context.saveGState()
 
-            // Next 3 lines makes the rotations so that the page look in the right direction
             context.translateBy(x: 0.0, y: pageRect.size.height)
             context.scaleBy(x: 1.0, y: -1.0)
             context.concatenate(page.getDrawingTransform(.mediaBox, rect: pageRect, rotate: 0, preserveAspectRatio: true))
@@ -311,12 +243,9 @@ class ViewController: UIViewController, UIDocumentPickerDelegate, UICollectionVi
         
         let indexPath = pdfListView.indexPath(for: cell)
         
-//        let singlePDF = pdfList[indexPath.item]
-//        let thumbNailOfSingle = singlePDF["pdfArr"] as! [PFFileObject]
         
         let l = pdfList[indexPath!.item]
         let g = l["pdfArr"] as! [PFFileObject]
-//        let pdfPages = pdfList[indexPath!.item]
         
         
         let secondDetailsViewController = segue.destination as! PDFViewerController
@@ -332,12 +261,12 @@ class ViewController: UIViewController, UIDocumentPickerDelegate, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PDFCollectionViewCell", for: indexPath) as! PDFCollectionViewCell
         print("indexPath.item: \(indexPath.item)")
-//        let b = a["pdfArr"] as! [PFFileObject]
+        
         let singlePDF = pdfList[indexPath.item]
         let thumbNailOfSingle = singlePDF["pdfArr"] as! [PFFileObject]
         let thumb = thumbNailOfSingle[0].url!
         let thumbnailURL = URL(string: thumb)!
-        
+        // This segment of code until line 281 (reference 7 from report).
         if let data = try? Data(contentsOf: thumbnailURL) {
             if let image = UIImage(data: data) {
                 DispatchQueue.main.async {
@@ -345,7 +274,7 @@ class ViewController: UIViewController, UIDocumentPickerDelegate, UICollectionVi
                 }
             }
         }
-        
+        //
         cell.pdfURLInfo = thumbNailOfSingle
         print("cell.pdfURLInfo.count = \(cell.pdfURLInfo.count)")
         

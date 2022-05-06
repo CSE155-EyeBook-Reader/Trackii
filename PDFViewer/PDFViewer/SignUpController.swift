@@ -45,6 +45,7 @@ class SignUpController: UIViewController, UITextFieldDelegate {
         
         // Do any additional setup after loading the view.
     }
+    //reference 8
     @IBAction func onSignUp(_ sender: Any) {
         if passwordTextField.text == passwordConfirmationTextField.text {
             let user = PFUser()

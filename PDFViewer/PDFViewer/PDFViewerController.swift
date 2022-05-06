@@ -46,6 +46,7 @@ class PDFViewerController: UIViewController {
                         
             let c = pdfPages[i].url!
             let d = URL(string: c)!
+            // This segment of code until line 57 (reference 7 from report).
             if let data = try? Data(contentsOf: d) {
                 if let image = UIImage(data: data) {
                     DispatchQueue.main.async {
