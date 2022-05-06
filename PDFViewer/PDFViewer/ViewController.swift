@@ -19,10 +19,22 @@ class ViewController: UIViewController, UIDocumentPickerDelegate, UICollectionVi
     
     
     
+
     
+    @IBOutlet weak var importFile: UIButton!
     
+    @IBOutlet weak var uploadFile: UIButton!
     
     @IBOutlet weak var pdfListView: UICollectionView!
+    
+    @IBOutlet weak var collection: UICollectionView!
+    
+    @IBOutlet weak var userIcon: UIImageView!
+    
+    @IBOutlet weak var userName: UILabel!
+    
+    @IBOutlet weak var myCollectionTitle: UILabel!
+    
     
     let storage = UserDefaults.standard
     var pdfList = [PFObject]()
@@ -39,6 +51,26 @@ class ViewController: UIViewController, UIDocumentPickerDelegate, UICollectionVi
         super.viewDidLoad()
         pdfListView.dataSource = self
         pdfListView.delegate = self
+        
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = view.bounds
+        gradientLayer.colors = [
+            UIColor.systemBlue.cgColor,
+            UIColor.systemTeal.cgColor,
+        ]
+        view.layer.addSublayer(gradientLayer)
+        
+        pdfListView.backgroundColor = UIColor.clear.withAlphaComponent(0)
+        
+        //usernameTextField.tintColor = UIColor.systemBrown
+        view.addSubview(importFile)
+        view.addSubview(uploadFile)
+        view.addSubview(collection)
+        view.addSubview(userIcon)
+        view.addSubview(userName)
+        view.addSubview(myCollectionTitle)
+        
+        
         
 //        let layout = pdfListView.collectionViewLayout as! UICollectionViewFlowLayout
 //
