@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import Parse
 
 class PDFCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var pdfThumbnail: UIImageView!
-    
+    var pdfURLInfo: [PFFileObject] = []
 }

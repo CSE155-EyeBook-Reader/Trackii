@@ -10,6 +10,7 @@ import MobileCoreServices
 import PDFKit
 import AVKit
 import SeeSo
+import Parse
 
 var pdfView: PDFView? = nil
 var checkedMiddle = true
@@ -19,6 +20,8 @@ var checkedZoomedIn = false
 
 class PDFViewerController: UIViewController {
     var storage = UserDefaults.standard
+    
+    var pdfPages: [PFFileObject] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +36,24 @@ class PDFViewerController: UIViewController {
     }
     
     func openPDFInScreen(){
+        
+        let pdfDocument = PDFDocument()
+        for i in 0...pdfPages.count-1 {
+                        
+            let c = pdfPages[i].url!
+            let d = URL(string: c)!
+            if let data = try? Data(contentsOf: d) {
+                if let image = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                        let pdfPage = PDFPage(image: image)
+                                
+                        pdfDocument.insert(pdfPage!, at: i)
+                    }
+                }
+            }
+        }
+        
+        
         pdfView = PDFView(frame: self.view.bounds)
         pdfView!.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.view.addSubview(pdfView!)
@@ -41,9 +62,9 @@ class PDFViewerController: UIViewController {
         pdfView!.autoScales = true
 
         // Load Sample.pdf file from app bundle.
-        let fileURL = storage.url(forKey: "PDFURL")
-        pdfView!.document = PDFDocument(url: fileURL!)
-    
+//        let fileURL = storage.url(forKey: "PDFURL")
+//        pdfView!.document = PDFDocument(url: fileURL!)
+        pdfView!.document = pdfDocument
     }
     
     // || SEESO FRAMEWORK START HERE || //

@@ -25,8 +25,8 @@ class ViewController: UIViewController, UIDocumentPickerDelegate, UICollectionVi
     @IBOutlet weak var pdfListView: UICollectionView!
     
     let storage = UserDefaults.standard
-//    var pdfList = [PFObject]()
-    var pdfList = [PFFileObject]()
+    var pdfList = [PFObject]()
+//    var pdfList = [PFFileObject]()
 
     var segmentedPDFToJPGList = [UIImage]()
     var imageIndexCur = 1
@@ -39,18 +39,30 @@ class ViewController: UIViewController, UIDocumentPickerDelegate, UICollectionVi
         super.viewDidLoad()
         pdfListView.dataSource = self
         pdfListView.delegate = self
+        
+//        let layout = pdfListView.collectionViewLayout as! UICollectionViewFlowLayout
+//
+//        layout.minimumLineSpacing = 4
+//        layout.minimumInteritemSpacing = 4
+//
+//        let width = (view.frame.size.width - layout.minimumLineSpacing * 2 ) / 3
+//        layout.itemSize = CGSize(width: width, height: width * 3 / 2)
+        
+        
+        
         let thisUser = PFUser.current()
         
         //let query =
         
         var query = PFQuery(className: "PDF")
         query.includeKeys(["ACL", "pdfArr"])
-        query.limit = 5
+        query.limit = 25
         query.findObjectsInBackground { (pdfArr, error) in
         if pdfArr != nil{
-            let a = pdfArr![4]
+            let a = pdfArr![14]
             let b = a["pdfArr"] as! [PFFileObject]
-            self.pdfList = b
+//            self.pdfList = b
+            self.pdfList = pdfArr!
             
             print("pdfList size:\(self.pdfList.count)")
 //            for i in 0...b.count-1 {
@@ -71,6 +83,15 @@ class ViewController: UIViewController, UIDocumentPickerDelegate, UICollectionVi
             print("Error: \(error)")
         }
         }
+//        let layout = pdfListView.collectionViewLayout as! UICollectionViewFlowLayout
+//
+//        layout.minimumLineSpacing = 4
+//        layout.minimumInteritemSpacing = 4
+//
+//        let width = (view.frame.size.width - layout.minimumLineSpacing * 2 ) / 3
+//        layout.itemSize = CGSize(width: width, height: width * 3 / 2)
+        
+        
     }
         
         
@@ -129,7 +150,7 @@ class ViewController: UIViewController, UIDocumentPickerDelegate, UICollectionVi
     @IBAction func uploadPDF(_ sender: Any) {
         let pdfURL = storage.url(forKey: "PDFURL")!
                 
-            let pageThree = thumbnailFromPdf(withUrl: pdfURL, pageNumber: 4)
+//            let pageThree = thumbnailFromPdf(withUrl: pdfURL, pageNumber: 4)
             let doc = PDFDocument(url: pdfURL)
                 
         //        var segmentedPDFImages = [UIImage]()
@@ -172,10 +193,10 @@ class ViewController: UIViewController, UIDocumentPickerDelegate, UICollectionVi
         var url = URL(string: "https://www.zerotoappstore.com/")
         var query = PFQuery(className: "PDF")
         query.includeKeys(["ACL", "pdfArr"])
-        query.limit = 5
+        query.limit = 25
         query.findObjectsInBackground { (pdfArr, error) in
         if pdfArr != nil{
-            let a = pdfArr![4]
+            let a = pdfArr![14]
             let b = a["pdfArr"] as! [PFFileObject]
             for i in 0...b.count-1 {
                             
@@ -215,7 +236,9 @@ class ViewController: UIViewController, UIDocumentPickerDelegate, UICollectionVi
                 pdfView!.document = pdfDocument
     }
     
-    func thumbnailFromPdf(withUrl url:URL, pageNumber:Int, width: CGFloat = 240) -> UIImage? {
+//    func thumbnailFromPdf(withUrl url:URL, pageNumber:Int, width: CGFloat = 240) -> UIImage? {
+    func thumbnailFromPdf(withUrl url:URL, pageNumber:Int, width: CGFloat = 1000) -> UIImage? {
+
             guard let pdf = CGPDFDocument(url as CFURL),
                 let page = pdf.page(at: pageNumber)
                 else {
@@ -248,6 +271,25 @@ class ViewController: UIViewController, UIDocumentPickerDelegate, UICollectionVi
             return image
     }
     
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let cell = sender as! PDFCollectionViewCell
+        
+        let indexPath = pdfListView.indexPath(for: cell)
+        
+//        let singlePDF = pdfList[indexPath.item]
+//        let thumbNailOfSingle = singlePDF["pdfArr"] as! [PFFileObject]
+        
+        let l = pdfList[indexPath!.item]
+        let g = l["pdfArr"] as! [PFFileObject]
+//        let pdfPages = pdfList[indexPath!.item]
+        
+        
+        let secondDetailsViewController = segue.destination as! PDFViewerController
+        secondDetailsViewController.pdfPages = g
+
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         print("In collectionView (pdfLIst.count): \(self.pdfList.count)")
         return self.pdfList.count
@@ -255,8 +297,12 @@ class ViewController: UIViewController, UIDocumentPickerDelegate, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PDFCollectionViewCell", for: indexPath) as! PDFCollectionViewCell
-        let singlePDF = pdfList[indexPath.item].url!
-        let thumbnailURL = URL(string: singlePDF)!
+        print("indexPath.item: \(indexPath.item)")
+//        let b = a["pdfArr"] as! [PFFileObject]
+        let singlePDF = pdfList[indexPath.item]
+        let thumbNailOfSingle = singlePDF["pdfArr"] as! [PFFileObject]
+        let thumb = thumbNailOfSingle[0].url!
+        let thumbnailURL = URL(string: thumb)!
         
         if let data = try? Data(contentsOf: thumbnailURL) {
             if let image = UIImage(data: data) {
@@ -265,6 +311,9 @@ class ViewController: UIViewController, UIDocumentPickerDelegate, UICollectionVi
                 }
             }
         }
+        
+        cell.pdfURLInfo = thumbNailOfSingle
+        print("cell.pdfURLInfo.count = \(cell.pdfURLInfo.count)")
         
         return cell
     }
