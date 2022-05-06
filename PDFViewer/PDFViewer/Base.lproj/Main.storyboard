@@ -267,43 +267,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="1180" height="820"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tX9-8a-xDK">
-                                <rect key="frame" x="134" y="314" width="120" height="31"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Untitled design (14)" translatesAutoresizingMaskIntoConstraints="NO" id="5hZ-X0-4RN">
+                                <rect key="frame" x="947" y="74" width="61" height="58"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Open File Here"/>
-                                <connections>
-                                    <action selector="openFileInScreen:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Xjz-rg-LXw"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nVw-Gt-qFb">
-                                <rect key="frame" x="80" y="389" width="228" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Open PDF in Another Controller"/>
-                                <connections>
-                                    <segue destination="lij-Qo-RIO" kind="show" id="Rjd-OV-jWM"/>
-                                </connections>
-                            </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Untitled design (14)" translatesAutoresizingMaskIntoConstraints="NO" id="5hZ-X0-4RN">
-                                <rect key="frame" x="247" y="74" width="61" height="58"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="61" id="5EV-nE-BQ2"/>
-                                    <constraint firstAttribute="height" constant="58" id="C37-Yb-jYD"/>
-                                </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="geC-MC-8P5">
-                                <rect key="frame" x="316" y="93" width="78" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="EGR-tp-Uo3"/>
-                                    <constraint firstAttribute="width" constant="78" id="kkE-2D-nYx"/>
-                                </constraints>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="geC-MC-8P5">
+                                <rect key="frame" x="1016" y="93" width="78" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6ro-dc-hAr">
-                                <rect key="frame" x="148" y="250" width="93" height="31"/>
+                                <rect key="frame" x="80" y="250" width="93" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Import File"/>
@@ -312,7 +288,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0tU-HA-8By">
-                                <rect key="frame" x="159" y="456" width="71" height="31"/>
+                                <rect key="frame" x="237" y="250" width="71" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Upload"/>
@@ -326,17 +302,8 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title=""/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bhr-y1-UoN">
-                                <rect key="frame" x="157" y="540" width="72" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Display"/>
-                                <connections>
-                                    <action selector="diplayFunc:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Yvd-kA-GWP"/>
-                                </connections>
-                            </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="E7o-IX-tdt">
-                                <rect key="frame" x="407" y="153" width="738" height="637"/>
+                                <rect key="frame" x="407" y="152" width="738" height="637"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Q4X-Uy-fct">
@@ -370,12 +337,6 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="geC-MC-8P5" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="19" id="QKX-El-gl4"/>
-                            <constraint firstItem="5hZ-X0-4RN" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="UN9-JC-S1X"/>
-                            <constraint firstItem="geC-MC-8P5" firstAttribute="leading" secondItem="5hZ-X0-4RN" secondAttribute="trailing" constant="8" symbolic="YES" id="gFw-Hc-yyn"/>
-                            <constraint firstItem="5hZ-X0-4RN" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="247" id="o0b-Hu-7he"/>
-                        </constraints>
                     </view>
                     <connections>
                         <outlet property="name" destination="geC-MC-8P5" id="5Om-Kc-9JA"/>
@@ -431,7 +392,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Rjd-OV-jWM"/>
         <segue reference="QWd-ni-U8a"/>
     </inferredMetricsTieBreakers>
     <resources>

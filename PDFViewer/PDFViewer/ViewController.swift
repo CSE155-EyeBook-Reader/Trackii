@@ -105,21 +105,21 @@ class ViewController: UIViewController, UIDocumentPickerDelegate, UICollectionVi
         present(documentPicker, animated: true, completion: nil)
     }
     
-    @IBAction func openFileInScreen(_ sender: Any) {
-        
-        // Add PDFView to view controller.
-            let pdfView = PDFView(frame: self.view.bounds)
-            pdfView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-            self.view.addSubview(pdfView)
-            
-            // Fit content in PDFView.
-            pdfView.autoScales = true
-            
-            // Load Sample.pdf file from app bundle.
-            let fileURL = storage.url(forKey: "PDFURL")
-            pdfView.document = PDFDocument(url: fileURL!)
-        
-    }
+//    @IBAction func openFileInScreen(_ sender: Any) {
+//
+//        // Add PDFView to view controller.
+//            let pdfView = PDFView(frame: self.view.bounds)
+//            pdfView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+//            self.view.addSubview(pdfView)
+//
+//            // Fit content in PDFView.
+//            pdfView.autoScales = true
+//
+//            // Load Sample.pdf file from app bundle.
+//            let fileURL = storage.url(forKey: "PDFURL")
+//            pdfView.document = PDFDocument(url: fileURL!)
+//
+//    }
     
   func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         print("k")
@@ -179,6 +179,9 @@ class ViewController: UIViewController, UIDocumentPickerDelegate, UICollectionVi
                 (success: Bool, error: Error?) in
                 if (success) {
                     print("Success")
+                    //self.pdfListView.reloadData()
+                    self.viewDidLoad()
+                    
                 } else {
                     print("Fail")
                     print("Error: \(error)")
@@ -187,54 +190,54 @@ class ViewController: UIViewController, UIDocumentPickerDelegate, UICollectionVi
             }
     }
     
-    @IBAction func diplayFunc(_ sender: Any) {
-        let pdfDocument = PDFDocument()
-                
-        var url = URL(string: "https://www.zerotoappstore.com/")
-        var query = PFQuery(className: "PDF")
-        query.includeKeys(["ACL", "pdfArr"])
-        query.limit = 25
-        query.findObjectsInBackground { (pdfArr, error) in
-        if pdfArr != nil{
-            let a = pdfArr![14]
-            let b = a["pdfArr"] as! [PFFileObject]
-            for i in 0...b.count-1 {
-                            
-                let c = b[i].url!
-                let d = URL(string: c)!
-                if let data = try? Data(contentsOf: d) {
-                    if let image = UIImage(data: data) {
-                        DispatchQueue.main.async {
-                            let pdfPage = PDFPage(image: image)
-                                    
-                            pdfDocument.insert(pdfPage!, at: i)
-                        }
-                    }
-                }
-            }
-                           
-                        print(pdfArr!)
-                        print("pulledJPGList count: \(self.pulledJPGList.count)")
-                    }else{
-                        print("Error: \(error)")
-                    }
-                    
-        }
-                
-                
-                
-//                var example = PDFInfo()
-//                example.pdfFile = pdfDocument
-        //
-        //        //To display for testing purposes
-                pdfView = PDFView(frame: self.view.bounds)
-                pdfView!.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-                self.view.addSubview(pdfView!)
-        //
-                pdfView!.autoScales = true
-        //
-                pdfView!.document = pdfDocument
-    }
+//    @IBAction func diplayFunc(_ sender: Any) {
+//        let pdfDocument = PDFDocument()
+//
+//        var url = URL(string: "https://www.zerotoappstore.com/")
+//        var query = PFQuery(className: "PDF")
+//        query.includeKeys(["ACL", "pdfArr"])
+//        query.limit = 25
+//        query.findObjectsInBackground { (pdfArr, error) in
+//        if pdfArr != nil{
+//            let a = pdfArr![14]
+//            let b = a["pdfArr"] as! [PFFileObject]
+//            for i in 0...b.count-1 {
+//
+//                let c = b[i].url!
+//                let d = URL(string: c)!
+//                if let data = try? Data(contentsOf: d) {
+//                    if let image = UIImage(data: data) {
+//                        DispatchQueue.main.async {
+//                            let pdfPage = PDFPage(image: image)
+//
+//                            pdfDocument.insert(pdfPage!, at: i)
+//                        }
+//                    }
+//                }
+//            }
+//
+//                        print(pdfArr!)
+//                        print("pulledJPGList count: \(self.pulledJPGList.count)")
+//                    }else{
+//                        print("Error: \(error)")
+//                    }
+//
+//        }
+//
+//
+//
+////                var example = PDFInfo()
+////                example.pdfFile = pdfDocument
+//        //
+//        //        //To display for testing purposes
+//                pdfView = PDFView(frame: self.view.bounds)
+//                pdfView!.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+//                self.view.addSubview(pdfView!)
+//        //
+//                pdfView!.autoScales = true
+//        //
+//                pdfView!.document = pdfDocument
+//    }
     
 //    func thumbnailFromPdf(withUrl url:URL, pageNumber:Int, width: CGFloat = 240) -> UIImage? {
     func thumbnailFromPdf(withUrl url:URL, pageNumber:Int, width: CGFloat = 1000) -> UIImage? {
@@ -270,7 +273,6 @@ class ViewController: UIViewController, UIDocumentPickerDelegate, UICollectionVi
             UIGraphicsEndImageContext()
             return image
     }
-    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let cell = sender as! PDFCollectionViewCell
