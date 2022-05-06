@@ -33,8 +33,6 @@ class PDFViewerController: UIViewController {
                     curState = .Idle
                 }
                 initViewComponents()
-
-        // Do any additional setup after loading the view.
     }
     
     func openPDFInScreen(){
@@ -69,12 +67,11 @@ class PDFViewerController: UIViewController {
         pdfView!.document = pdfDocument
     }
     
-
+    // || SEESO FRAMEWORK START HERE || //
+    
     let licenseKey : String = "dev_jartgjf40yfbkfbxb55ggsk8pkuqjd6x2mo79ycy" // Please enter the key value for development issued by the SeeSo.io
     
-    //
-    var frame : Int = 0
-    var lastTime : Double = 0
+   // var frame : Int = 0
     enum AppState : String {
         case Disable = " " // User denied access to the camera.
         case Idle = "" // User has allowed access to the camera.
@@ -91,13 +88,9 @@ class PDFViewerController: UIViewController {
     //This switch indicates whether to Initialize GazeTracker in using UserStatus.
     let userStatusSwitchLabel : UILabel = UILabel()
     let userStatusSwitch : UISwitch = UISwitch()
-    //A switch with the ability to create or destroy Gaze Tracker objects.
     let initTrackerLabel : UILabel = UILabel()
     let initTrackerSwitch : UISwitch = UISwitch()
-    
     var userStatusResultLabel : UserStatusLabel?
-    
-    //This switch is responsible for starting or stopping gaze tracking.
     let startTrackingLabel : UILabel = UILabel()
     let startTrackingSwitch : UISwitch = UISwitch()
     
@@ -107,43 +100,24 @@ class PDFViewerController: UIViewController {
     
     var gazePointView : GazePointView? = nil
     var caliPointView : CalibrationPointView? = nil
-    
     var caliMode : CalibrationMode = .FIVE_POINT
-    
     var calibrationData : [Double] = []
-    
     let startCalibrationLabel : UILabel = UILabel()
     let calibrationBtn : UIButton = UIButton()
     let bottomView : UIView = UIView()
     let loadBtn : UIButton = UIButton()
-    let saveBtn : UIButton = UIButton()
     let fiveRadioBtn : RadioButton = RadioButton()
     let oneRadioBtn : RadioButton = RadioButton()
     
     var isFiltered : Bool = false
-    
     let preview : UIView = UIView()
-    
     var curState : AppState? = nil {
         didSet {
             changeState()
         }
     }
     
-    //It is an object that filters the gaze coordinate value.
     var filterManager : OneEuroFilterManager? = OneEuroFilterManager()
-    
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        //Check if the camera is accessible.
-//        if !checkAccessCamera() {
-//            //If access is not possible, the user is requested to access.
-//            requestAccess()
-//        }else{
-//            curState = .Idle
-//        }
-//        initViewComponents()
-//    }
     
     private func requestAccess(){
         AVCaptureDevice.requestAccess(for: AVMediaType.video) { response in
@@ -156,7 +130,6 @@ class PDFViewerController: UIViewController {
         }
     }
     
-    
     // Whenever the AppState, ui processing and appropriate functions are called.
     private func changeState() {
         if let state : AppState = curState {
@@ -166,18 +139,14 @@ class PDFViewerController: UIViewController {
                 switch state {
                 case .Disable:
                     self.disableLoadBtn()
-                    self.disableSaveBtn()
                     self.disableUIComponents()
                 case .Idle:
                     self.setIdleStateUIComponents()
                     self.disableLoadBtn()
-                    self.disableSaveBtn()
                     self.enableSwitch(select: self.userStatusSwitch)
                 case .Initailzed:
                     self.setInitializedStateUIComponents()
-                    //self.tracker?.removeCameraPreview()
                     self.disableLoadBtn()
-                    self.disableSaveBtn()
                 case .Tracking:
                     if self.checkLoadData() {
                         self.enableLoadBtn()
@@ -192,9 +161,6 @@ class PDFViewerController: UIViewController {
             }
         }
     }
-    
-    
-    
     
     private func checkAccessCamera() -> Bool {
         return AVCaptureDevice.authorizationStatus(for: .video) == .authorized
@@ -267,12 +233,6 @@ class PDFViewerController: UIViewController {
                     }
                 }
             }
-        }else if sender == saveBtn {
-            DispatchQueue.main.async {
-                self.saveCalibrationData()
-                self.disableSaveBtn()
-                self.statusLabel.text = "Saved calibration datas."
-            }
         }
     }
     
@@ -313,8 +273,6 @@ class PDFViewerController: UIViewController {
         curState = .Idle
         hideUserStatusLabel()
     }
-    
-    
 }
 
 extension PDFViewerController : InitializationDelegate {
@@ -360,10 +318,6 @@ extension PDFViewerController : StatusDelegate {
 extension PDFViewerController : GazeDelegate {
     func onGaze(gazeInfo: GazeInfo) {
         
-//        var checkedMiddle = true
-//        let pdfViewPage = PDFView(frame: view.bounds)
-        
-        
         //During the calibration process, the gaze UI is not displayed.
         if tracker != nil && tracker!.isCalibrating() {
             self.hidePointView(view: self.gazePointView!)
@@ -375,18 +329,8 @@ extension PDFViewerController : GazeDelegate {
                     self.gazePointView?.moveView(x: gazeInfo.x, y: gazeInfo.y)
                    
                     
-//                    if (gazeInfo.y < 620 && gazeInfo.y > 150){
-//                        checkedMiddle = true
-//                    }
-//
-//                    if (gazeInfo.y > 620){
-//                        if(checkedMiddle == true){
-//                            pdfView?.goToNextPage(pdfView.self)
-//                            checkedMiddle = false;
-//                            print("CheckedMiddle: \(checkedMiddle)")
-//                        }
-//                    }
-                       
+                    // || STUDENT IMPLEMENTATION OF CORE FEATURES || //
+                    
                     //SCROLLING DOWN
                     if (gazeInfo.y > 620){
                         pdfView?.scrollSelectionToVisible(pdfView?.documentView!.center.y = (pdfView?.documentView!.center.y)! - 5)
@@ -401,35 +345,27 @@ extension PDFViewerController : GazeDelegate {
                     if (gazeInfo.x > 880 && (gazeInfo.y > 150 && gazeInfo.y < 500) && checkedZoomedIn == true){
                         pdfView?.scrollSelectionToVisible(pdfView?.documentView!.center.x = (pdfView?.documentView!.center.x)! - 1.5)
                     }
-//
+                    
                     //SCROLLING LEFT
                     if (gazeInfo.x < 200 && (gazeInfo.y > 150 && gazeInfo.y < 500) && checkedZoomedIn == true){
                         pdfView?.scrollSelectionToVisible(pdfView?.documentView!.center.x = (pdfView?.documentView!.center.x)! + 1.5)
                     }
                     
-                    //1.  we need to border to stop it from scrolling up and down past the document
-                    
                     //ZOOM IN
                     if (gazeInfo.x > 900 && gazeInfo.y < 100){
-
-                        //pdfView?.scaleFactor = pdfView!.scale
                         pdfView?.maxScaleFactor = scaleZoomInRate
                         checkedZoomedIn = true
                         pdfView?.zoomIn(pdfView.self)
-
                     }
 
                     //ZOOM OUT
                     if (gazeInfo.x < 100 && gazeInfo.y < 100){
-//
                         pdfView?.minScaleFactor = scaleZoomOutRate
-//
                         pdfView?.zoomOut(pdfView.self)
                     }
                     
                     
-                    
-                    
+                // || SEESO FRAMEWORK CONTINUES || //
                     
                 }else {
                     self.hidePointView(view: self.gazePointView!)
@@ -448,7 +384,6 @@ extension PDFViewerController : GazeDelegate {
             }
         }
     }
-    
 }
 
 extension PDFViewerController : CalibrationDelegate {
@@ -476,21 +411,17 @@ extension PDFViewerController : CalibrationDelegate {
         curState = .Tracking
         changeState()
         self.calibrationData = calibrationData
-        enableSaveBtn()
     }
 }
-
 
 // UI componenents setting functions
 extension PDFViewerController {
     
     private func initViewComponents(){
         initStatusLabel()
-        //initModeUI()
         initInitTrackerUI()
         initStartTrackingUI()
         initGazePointView()
-        //initGazeFilterUI()
         initStartCalibrationUI()
         initCalibrationPointView()
         initCalibrationModeUI()
@@ -508,20 +439,6 @@ extension PDFViewerController {
         self.view.addSubview(statusLabel)
     }
     
-//    private func initModeUI(){
-//        userStatusSwitch.frame.size = CGSize(width: 50, height: 50)
-//        userStatusSwitch.frame.origin = CGPoint(x: self.view.frame.width - 60, y: self.view.frame.height/2 - 140)
-//        userStatusSwitch.addTarget(self, action: #selector(onClickSwitch(sender:)), for: .valueChanged)
-//        self.view.addSubview(userStatusSwitch)
-//
-//        userStatusSwitchLabel.frame.size = CGSize(width: 150, height: userStatusSwitch.frame.height)
-//        userStatusSwitchLabel.frame.origin = CGPoint(x: userStatusSwitch.frame.minX - (userStatusSwitchLabel.frame.width + 5), y: userStatusSwitch.frame.minY)
-//        userStatusSwitchLabel.text = "UserStatus"
-//        userStatusSwitchLabel.textColor = UIColor.blue
-//        userStatusSwitchLabel.textAlignment = .center
-//        self.view.addSubview(userStatusSwitchLabel)
-//    }
-    
     private func initInitTrackerUI(){
         initTrackerSwitch.frame.size = CGSize(width: 50, height: 50)
         initTrackerSwitch.frame.origin = CGPoint(x: self.view.frame.width - 60, y: self.view.frame.height/2 - 80)
@@ -534,7 +451,6 @@ extension PDFViewerController {
         initTrackerLabel.textColor = UIColor.blue
         initTrackerLabel.textAlignment = .center
         self.view.addSubview(initTrackerLabel)
-        
     }
     
     private func initPreview() {
@@ -556,24 +472,8 @@ extension PDFViewerController {
         startTrackingLabel.textColor = UIColor.blue
         startTrackingLabel.textAlignment = .center
         self.view.addSubview(startTrackingLabel)
-        
-        
     }
-    
-//    private func initGazeFilterUI(){
-//        gazeFilterSwitch.frame.size = CGSize(width: 50, height: 50)
-//        gazeFilterSwitch.frame.origin = CGPoint(x: self.view.frame.width - 60, y: self.view.frame.height/2 + 40)
-//        gazeFilterSwitch.addTarget(self, action: #selector(onClickSwitch(sender:)), for: .valueChanged)
-//        self.view.addSubview(gazeFilterSwitch)
-//
-//        gazeFilterLabel.frame.size = CGSize(width: 150, height: gazeFilterSwitch.frame.height)
-//        gazeFilterLabel.frame.origin = CGPoint(x: gazeFilterSwitch.frame.minX - (startTrackingLabel.frame.width + 5), y: gazeFilterSwitch.frame.minY)
-//        gazeFilterLabel.text = "Filtering"
-//        gazeFilterLabel.textColor = UIColor.blue
-//        gazeFilterLabel.textAlignment = .center
-//        self.view.addSubview(gazeFilterLabel)
-//    }
-    
+        
     private func initGazePointView(){
         self.gazePointView = GazePointView(frame: self.view.bounds)
         self.view.addSubview(gazePointView!)
@@ -606,7 +506,6 @@ extension PDFViewerController {
         oneRadioBtn.awakeFromNib()
         oneRadioBtn.addTarget(self, action: #selector(onClickBtn(sender:)), for: .touchUpInside)
         self.view.addSubview(oneRadioBtn)
-        
         fiveRadioBtn.frame.size = CGSize(width: 50, height: 50)
         fiveRadioBtn.isSelected = true
         fiveRadioBtn.alternateButton = [oneRadioBtn]
@@ -615,7 +514,6 @@ extension PDFViewerController {
         fiveRadioBtn.setTitle("FIVE", for: .normal)
         fiveRadioBtn.addTarget(self, action: #selector(onClickBtn(sender:)), for: .touchUpInside)
         self.view.addSubview(fiveRadioBtn)
-        
         startCalibrationLabel.frame.size = CGSize(width: 150, height: oneRadioBtn.frame.height)
         startCalibrationLabel.frame.origin = CGPoint(x: self.view.frame.width - 180, y: self.view.frame.height/2 + 100)
         startCalibrationLabel.text = "Calibration"
@@ -623,20 +521,13 @@ extension PDFViewerController {
         startCalibrationLabel.textAlignment = .center
         self.view.addSubview(startCalibrationLabel)
         
-        
         bottomView.frame = CGRect(x: oneRadioBtn.frame.minX, y: oneRadioBtn.frame.maxY + 20, width: calibrationBtn.frame.maxX - oneRadioBtn.frame.minX, height: 80)
         self.view.addSubview(bottomView)
         
         loadBtn.frame = CGRect(x: 10, y: 5, width: bottomView.frame.width/2 - 20, height: bottomView.frame.height/2 - 20)
-        saveBtn.frame = CGRect(x: bottomView.frame.width/2 + 10, y: 5, width: bottomView.frame.width/2 - 20, height: bottomView.frame.height/2 - 20)
-        
         loadBtn.setTitle("Load", for: .normal)
         loadBtn.setTitleColor(.blue, for: .normal)
         loadBtn.addTarget(self, action: #selector(onClickBtn(sender:)), for: .touchDown)
-        saveBtn.setTitle("Save", for: .normal)
-        saveBtn.setTitleColor(.blue, for: .normal)
-        saveBtn.addTarget(self, action: #selector(onClickBtn(sender:)), for: .touchDown)
-        bottomView.addSubview(saveBtn)
         bottomView.addSubview(loadBtn)
     }
     
@@ -650,34 +541,18 @@ extension PDFViewerController {
         self.view.bringSubviewToFront(gazePointView!)
     }
     
-    
-    private func disableSaveBtn(){
-        DispatchQueue.main.async {
-            self.saveBtn.isHidden = true
-            self.calibrationData.removeAll()
-        }
-    }
-    
     private func disableLoadBtn(){
         DispatchQueue.main.async {
             self.loadBtn.isHidden = true
         }
     }
-    
-    
-    private func enableSaveBtn(){
-        DispatchQueue.main.async {
-            self.saveBtn.isHidden = false
-        }
-    }
-    
+        
     private func enableLoadBtn(){
         DispatchQueue.main.async {
             self.loadBtn.isHidden = false
         }
     }
-    
-    
+
     private func checkLoadData()-> Bool {
         if let _ = UserDefaults.standard.array(forKey: "calibrationData") as? [Double]{
             return true
@@ -692,17 +567,6 @@ extension PDFViewerController {
         }
         return false
     }
-    
-    
-    private func saveCalibrationData(){
-        if calibrationData.count > 0 {
-            UserDefaults.standard.removeObject(forKey: "calibrationData")
-            UserDefaults.standard.set(calibrationData, forKey: "calibrationData")
-        }
-    }
-    
-    
-    
     
     private func disableUIComponents(){
         disableSwitch(select: initTrackerSwitch)
@@ -763,8 +627,7 @@ extension PDFViewerController {
             self.userStatusResultLabel?.isHidden = true
         }
     }
-    
-    
+
     private func hidePointView(view : UIView){
         DispatchQueue.main.async {
             if !view.isHidden {
@@ -792,7 +655,6 @@ extension PDFViewerController {
             self.statusLabel.text = contents
         }
     }
-    
     
     private func resetSwitch(select :UISwitch){
         DispatchQueue.main.async {
@@ -824,36 +686,3 @@ extension PDFViewerController {
         }
     }
 }
-
-
-
-
-
-
-//extension ViewController: UIDocumentPickerDelegate {
-//    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
-//        print("k")
-//
-//        let selectedFileURL = urls.first
-//        let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-//        let sandboxFileURL = dir.appendingPathComponent(selectedFileURL!.lastPathComponent)
-//
-//        if FileManager.default.fileExists(atPath: sandboxFileURL.path){
-//
-//            print("Already exists! Do not copy, but store URL")
-//            UserDefaults.set(urls.first, forKey: "PDFURL")
-//
-//        } else {
-//            do {
-//
-//                try FileManager.default.copyItem(at: selectedFileURL!, to: sandboxFileURL)
-//                UserDefaults.set(urls.first, forKey: "PDFURL")
-//                print("Copied file")
-//            } catch {
-//
-//                print("Error: \(error)")
-//
-//            }
-//        }
-//    }
-//}

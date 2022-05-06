@@ -21,10 +21,6 @@ class GazePointView : UIView {
     }
     
     private func initSubviews(){
-//        verticalLine.frame.size = CGSize(width: 2.5, height: frame.height)
-//        verticalLine.backgroundColor = .red
-//        horizontalLine.frame.size = CGSize(width: frame.width, height: 2.5)
-//        horizontalLine.backgroundColor = .red
         pointView.frame.size = CGSize(width: 20, height: 20)
         pointView.layer.cornerRadius = 10
         pointView.backgroundColor = .blue
@@ -42,8 +38,6 @@ class GazePointView : UIView {
         let centerPoint = CGPoint(x: x, y: y)
         DispatchQueue.main.async {
             self.pointView.center = centerPoint
-//            self.verticalLine.frame.origin.x = centerPoint.x
-//            self.horizontalLine.frame.origin.y = centerPoint.y
         }
     }
     

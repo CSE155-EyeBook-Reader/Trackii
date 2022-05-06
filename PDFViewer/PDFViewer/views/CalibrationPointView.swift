@@ -12,12 +12,8 @@ class CalibrationPointView : UILabel {
     override init(frame: CGRect) {
         super.init(frame : frame)
         layer.cornerRadius = frame.width/4
-    //layer.borderColor = UIColor.blue.cgColor
         layer.borderWidth = 2
-        textAlignment = .center
-        textColor = .blue
         adjustsFontSizeToFitWidth = true
-        text = "0%"
     }
     
     func setProgress(progress : Double){
@@ -30,6 +26,4 @@ class CalibrationPointView : UILabel {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    
 }
