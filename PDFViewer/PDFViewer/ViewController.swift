@@ -88,10 +88,12 @@ class ViewController: UIViewController, UIDocumentPickerDelegate, UICollectionVi
         
         var query = PFQuery(className: "PDF")
         query.includeKeys(["ACL", "pdfArr"])
-        query.limit = 25
+        //query limit is important to see what max amount of pdfs we want to load in
+        query.limit = 40
         query.findObjectsInBackground { (pdfArr, error) in
         if pdfArr != nil{
-            let a = pdfArr![14]
+            //change back to 14
+            let a = pdfArr![3]
             let b = a["pdfArr"] as! [PFFileObject]
             self.pdfList = pdfArr!
             
@@ -101,13 +103,6 @@ class ViewController: UIViewController, UIDocumentPickerDelegate, UICollectionVi
             print("Error: \(error)")
         }
         }
-//        let layout = pdfListView.collectionViewLayout as! UICollectionViewFlowLayout
-//
-//        layout.minimumLineSpacing = 4
-//        layout.minimumInteritemSpacing = 4
-//
-//        let width = (view.frame.size.width - layout.minimumLineSpacing * 2 ) / 3
-//        layout.itemSize = CGSize(width: width, height: width * 3 / 2)
         
         
     }
@@ -260,7 +255,8 @@ class ViewController: UIViewController, UIDocumentPickerDelegate, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PDFCollectionViewCell", for: indexPath) as! PDFCollectionViewCell
-        print("indexPath.item: \(indexPath.item)")
+//        uncomment to debug
+//        print("indexPath.item: \(indexPath.item)")
         
         let singlePDF = pdfList[indexPath.item]
         let thumbNailOfSingle = singlePDF["pdfArr"] as! [PFFileObject]
@@ -276,7 +272,10 @@ class ViewController: UIViewController, UIDocumentPickerDelegate, UICollectionVi
         }
         //
         cell.pdfURLInfo = thumbNailOfSingle
-        print("cell.pdfURLInfo.count = \(cell.pdfURLInfo.count)")
+//        uncomment to debug
+//        print("cell.pdfURLInfo.count = \(cell.pdfURLInfo.count)")
+        
+        cell.contentView.layer.cornerRadius = 5.0
         
         return cell
     }

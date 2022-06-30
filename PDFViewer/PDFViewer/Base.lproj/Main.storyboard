@@ -267,13 +267,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="1180" height="820"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Untitled design (14)" translatesAutoresizingMaskIntoConstraints="NO" id="5hZ-X0-4RN">
-                                <rect key="frame" x="947" y="74" width="61" height="58"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Untitled design (14)" translatesAutoresizingMaskIntoConstraints="NO" id="5hZ-X0-4RN">
+                                <rect key="frame" x="947" y="75" width="61" height="57"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="geC-MC-8P5">
-                                <rect key="frame" x="1016" y="93" width="78" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="geC-MC-8P5">
+                                <rect key="frame" x="1038" y="93" width="56" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -284,9 +282,44 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title=""/>
                             </button>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.94999999999999996" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="E7o-IX-tdt">
-                                <rect key="frame" x="109" y="161" width="985" height="457"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Collection" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C9b-6x-MaV">
+                                <rect key="frame" x="502.5" y="92" width="175" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="175" id="5ed-Ru-bUH"/>
+                                    <constraint firstAttribute="height" constant="21" id="etR-4U-Kz8"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Alq-hA-lRh">
+                                <rect key="frame" x="375" y="676" width="136" height="47"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="136" id="KGh-4Y-nK5"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Import File" cornerStyle="capsule">
+                                    <fontDescription key="titleFontDescription" type="system" pointSize="21"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="importFile:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qL3-7b-I54"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JSd-mM-tav">
+                                <rect key="frame" x="685" y="674" width="138" height="49"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="138" id="dPV-tN-z6J"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Upload" cornerStyle="capsule">
+                                    <fontDescription key="titleFontDescription" type="system" pointSize="21"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="uploadPDF:" destination="BYZ-38-t0r" eventType="touchUpInside" id="pXt-0E-ZIJ"/>
+                                </connections>
+                            </button>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.94999999999999996" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="E7o-IX-tdt">
+                                <rect key="frame" x="136" y="209" width="919" height="402"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Q4X-Uy-fct">
                                     <size key="itemSize" width="219" height="233"/>
@@ -311,43 +344,37 @@
                                         <size key="customSize" width="219" height="233"/>
                                         <connections>
                                             <outlet property="pdfThumbnail" destination="JLO-Cb-gwk" id="cDg-IF-Et9"/>
-                                            <segue destination="lij-Qo-RIO" kind="presentation" id="pME-f1-J6a"/>
+                                            <segue destination="lij-Qo-RIO" kind="show" id="pME-f1-J6a"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Your Collection" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C9b-6x-MaV">
-                                <rect key="frame" x="503" y="92" width="175" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Alq-hA-lRh">
-                                <rect key="frame" x="375" y="676" width="136" height="47"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Import File" cornerStyle="capsule">
-                                    <fontDescription key="titleFontDescription" type="system" pointSize="21"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="importFile:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qL3-7b-I54"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JSd-mM-tav">
-                                <rect key="frame" x="685" y="674" width="138" height="49"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Upload" cornerStyle="capsule">
-                                    <fontDescription key="titleFontDescription" type="system" pointSize="21"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="uploadPDF:" destination="BYZ-38-t0r" eventType="touchUpInside" id="pXt-0E-ZIJ"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="geC-MC-8P5" firstAttribute="leading" secondItem="5hZ-X0-4RN" secondAttribute="trailing" constant="10" id="6V8-lt-yjQ"/>
+                            <constraint firstItem="C9b-6x-MaV" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ACN-hU-1ck"/>
+                            <constraint firstItem="E7o-IX-tdt" firstAttribute="trailing" secondItem="5hZ-X0-4RN" secondAttribute="trailing" id="AWS-bt-PUG"/>
+                            <constraint firstItem="geC-MC-8P5" firstAttribute="centerY" secondItem="5hZ-X0-4RN" secondAttribute="centerY" id="AvC-rL-qBR"/>
+                            <constraint firstItem="Alq-hA-lRh" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="375" id="BaP-pI-L4w"/>
+                            <constraint firstItem="geC-MC-8P5" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="19" id="HNl-7G-nuf"/>
+                            <constraint firstItem="C9b-6x-MaV" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="18" id="HQZ-Oo-Eh2"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="geC-MC-8P5" secondAttribute="trailing" constant="86" id="J8N-LK-UZv"/>
+                            <constraint firstItem="E7o-IX-tdt" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="203" id="Wyl-ZB-Bww"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="JSd-mM-tav" secondAttribute="trailing" constant="357" id="XRe-sb-lzi"/>
+                            <constraint firstItem="E7o-IX-tdt" firstAttribute="top" secondItem="C9b-6x-MaV" secondAttribute="bottom" constant="96" id="b8i-rb-QcK"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="E7o-IX-tdt" secondAttribute="trailing" constant="172" id="bV8-50-UiP"/>
+                            <constraint firstItem="E7o-IX-tdt" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="blY-9d-dQV"/>
+                            <constraint firstItem="geC-MC-8P5" firstAttribute="leading" secondItem="5hZ-X0-4RN" secondAttribute="trailing" constant="30" id="ef3-2z-vDi"/>
+                            <constraint firstItem="E7o-IX-tdt" firstAttribute="top" secondItem="geC-MC-8P5" secondAttribute="bottom" constant="95" id="elB-9H-ukm"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="JSd-mM-tav" secondAttribute="bottom" constant="77" id="j4D-62-heY"/>
+                            <constraint firstItem="Alq-hA-lRh" firstAttribute="top" secondItem="E7o-IX-tdt" secondAttribute="bottom" constant="65" id="ltO-q8-EgS"/>
+                            <constraint firstItem="5hZ-X0-4RN" firstAttribute="leading" secondItem="C9b-6x-MaV" secondAttribute="trailing" constant="269.5" id="n0r-h6-Bha"/>
+                            <constraint firstItem="JSd-mM-tav" firstAttribute="top" secondItem="E7o-IX-tdt" secondAttribute="bottom" constant="63" id="qYi-HB-btO"/>
+                            <constraint firstItem="JSd-mM-tav" firstAttribute="bottom" secondItem="Alq-hA-lRh" secondAttribute="bottom" id="qwk-3S-HRL"/>
+                            <constraint firstItem="E7o-IX-tdt" firstAttribute="top" secondItem="5hZ-X0-4RN" secondAttribute="bottom" constant="77" id="rhX-vF-rVX"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="collection" destination="E7o-IX-tdt" id="Ep3-am-til"/>
@@ -363,10 +390,45 @@
             </objects>
             <point key="canvasLocation" x="-539.49152542372883" y="811.46341463414637"/>
         </scene>
+        <!--FailSafeController-->
+        <scene sceneID="caG-hw-0B5">
+            <objects>
+                <viewController title="FailSafeController" id="qiq-ih-IuP" customClass="FailSafeController" customModule="PDFViewer" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="mcS-yT-H1A">
+                        <rect key="frame" x="0.0" y="0.0" width="1180" height="820"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pUv-42-Yvb">
+                                <rect key="frame" x="420" y="411" width="64" height="15"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="select"/>
+                                <connections>
+                                    <action selector="selectFile:" destination="qiq-ih-IuP" eventType="touchUpInside" id="ScP-Lt-FSE"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GC6-fp-IKg">
+                                <rect key="frame" x="709" y="395" width="68" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="upload"/>
+                                <connections>
+                                    <action selector="uploadFile:" destination="qiq-ih-IuP" eventType="touchUpInside" id="DvX-DK-klU"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="1mN-qd-fjr"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xc9-iV-Xw7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-583.22033898305085" y="1627.3170731707316"/>
+        </scene>
         <!--PDFViewerController-->
         <scene sceneID="dzf-eh-GaZ">
             <objects>
-                <viewController title="PDFViewerController" modalPresentationStyle="fullScreen" id="lij-Qo-RIO" customClass="PDFViewerController" customModule="PDFViewer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="PDFViewerController" modalPresentationStyle="currentContext" id="lij-Qo-RIO" customClass="PDFViewerController" customModule="PDFViewer" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="uAb-uK-IIr">
                         <rect key="frame" x="0.0" y="0.0" width="1180" height="820"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -408,7 +470,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="QWd-ni-U8a"/>
+        <segue reference="QNM-YW-GWw"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Untitled design (13)-1" width="1920" height="1080"/>

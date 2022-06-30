@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		311CB06D286D450000105C47 /* FailSafeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311CB06C286D450000105C47 /* FailSafeController.swift */; };
 		314EC1DE2824836B006409B5 /* PDFCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314EC1DD2824836B006409B5 /* PDFCollectionViewCell.swift */; };
 		3154479428132B5D00A1C5B9 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3154479328132B5D00A1C5B9 /* LoginController.swift */; };
 		3154479628132B7500A1C5B9 /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3154479528132B7500A1C5B9 /* SignUpController.swift */; };
@@ -41,6 +42,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		311CB06C286D450000105C47 /* FailSafeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailSafeController.swift; sourceTree = "<group>"; };
 		314EC1DD2824836B006409B5 /* PDFCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFCollectionViewCell.swift; sourceTree = "<group>"; };
 		3154479328132B5D00A1C5B9 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		3154479528132B7500A1C5B9 /* SignUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 				31D64DF328026FC7006AF65E /* ViewController.swift */,
 				3154479328132B5D00A1C5B9 /* LoginController.swift */,
 				31D64DF528026FC7006AF65E /* Main.storyboard */,
+				311CB06C286D450000105C47 /* FailSafeController.swift */,
 				3154479528132B7500A1C5B9 /* SignUpController.swift */,
 				31D64E03280270CE006AF65E /* PDFViewerController.swift */,
 				31D64DF828026FC7006AF65E /* Assets.xcassets */,
@@ -272,6 +275,7 @@
 				31D64DF028026FC7006AF65E /* AppDelegate.swift in Sources */,
 				3154479428132B5D00A1C5B9 /* LoginController.swift in Sources */,
 				3154479628132B7500A1C5B9 /* SignUpController.swift in Sources */,
+				311CB06D286D450000105C47 /* FailSafeController.swift in Sources */,
 				CFB5037D28039B5A00527D9F /* GazePointView.swift in Sources */,
 				314EC1DE2824836B006409B5 /* PDFCollectionViewCell.swift in Sources */,
 				31D64DF228026FC7006AF65E /* SceneDelegate.swift in Sources */,
