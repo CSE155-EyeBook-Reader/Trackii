@@ -90,6 +90,8 @@ Trackii - README
 ### [BONUS] Interactive Prototype
 <img src="http://g.recordit.co/749EUT7igL.gif" width=350><br>
 
+<img src="http://g.recordit.co/bVPfKPEL2x.gif" width=350><br>
+
 ## Schema 
 [This section will be completed in Unit 9]
 ### Models
