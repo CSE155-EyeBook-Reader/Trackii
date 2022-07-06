@@ -85,7 +85,7 @@ Trackii - README
 <img src="https://imgur.com/a/AUnaWHa" width=600>
 
 ### [BONUS] Digital Wireframes & Mockups
-![](https://imgur.com/a/AUnaWHa)
+![](https://i.imgur.com/Tb4Tsvo.png)
 
 ### [BONUS] Interactive Prototype
 <img src="http://g.recordit.co/749EUT7igL.gif" width=250><br>
