@@ -82,7 +82,7 @@ Trackii - README
 
 ## Wireframes
 [Add picture of your hand sketched wireframes in this section]
-<img src="https://imgur.com/a/AUnaWHa" width=400>
+<img src="https://imgur.com/a/AUnaWHa" width=200>
 
 ### [BONUS] Digital Wireframes & Mockups
 ![](https://i.imgur.com/Tb4Tsvo.png)
