@@ -89,7 +89,8 @@ Trackii - README
 
 ### [BONUS] Interactive Prototype
 Login
-<img src="http://g.recordit.co/749EUT7igL.gif">
+![](http://g.recordit.co/749EUT7igL.gif)
+![](http://g.recordit.co/lsn0HJogj6.gif)
 
 Select/Upload
 ## Schema 
