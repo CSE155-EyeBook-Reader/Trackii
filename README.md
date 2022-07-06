@@ -82,20 +82,16 @@ Trackii - README
 
 ## Wireframes
 [Add picture of your hand sketched wireframes in this section]
-<img src="https://imgur.com/a/AUnaWHa" width=200>
 
 ### [BONUS] Digital Wireframes & Mockups
 
 ![](https://i.imgur.com/Tb4Tsvo.png)
 
 ### [BONUS] Interactive Prototype
+Login
+<img src="http://g.recordit.co/749EUT7igL.gif">
 
-<img src="http://g.recordit.co/749EUT7igL.gif" width=200>
-<img src="http://g.recordit.co/bVPfKPEL2x.gif" width=200>
-
-![](http://g.recordit.co/749EUT7igL.gif)
-![](http://g.recordit.co/bVPfKPEL2x.gif)
-
+Select/Upload
 ## Schema 
 [This section will be completed in Unit 9]
 ### Models
