@@ -82,13 +82,13 @@ Trackii - README
 
 ## Wireframes
 [Add picture of your hand sketched wireframes in this section]
-<img src="https://imgur.com/a/AUnaWHa" width=600>
+<img src="https://imgur.com/a/AUnaWHa" width=400>
 
 ### [BONUS] Digital Wireframes & Mockups
 ![](https://i.imgur.com/Tb4Tsvo.png)
 
 ### [BONUS] Interactive Prototype
-<img src="http://g.recordit.co/749EUT7igL.gif" width=250><br>
+<img src="http://g.recordit.co/749EUT7igL.gif" width=350><br>
 
 ## Schema 
 [This section will be completed in Unit 9]
