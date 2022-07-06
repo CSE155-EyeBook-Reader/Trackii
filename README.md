@@ -87,6 +87,7 @@ Trackii - README
 ### [BONUS] Digital Wireframes & Mockups
 
 ### [BONUS] Interactive Prototype
+<img src="http://g.recordit.co/749EUT7igL.gif" width=250><br>
 
 ## Schema 
 [This section will be completed in Unit 9]
