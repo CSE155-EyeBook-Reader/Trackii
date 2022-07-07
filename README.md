@@ -30,7 +30,7 @@ Technological progress can only be defined as progress in directions for all of 
 
 ## Product Spec
 
-### 1. User Stories (Required and Optional)
+### 1. User Stories 
 
 **Required Must-have Stories**
 
@@ -69,7 +69,6 @@ Technological progress can only be defined as progress in directions for all of 
 * [DetailedPDFView <-> HomePage]
 
 ## Wireframes
-[Add picture of your hand sketched wireframes in this section]
 
 ### Digital Wireframes & Mockups
 
@@ -89,7 +88,7 @@ Select/Upload
 <img src="https://i.imgur.com/PjXTSMg.gif"><br>
 
 
-Select and Track
+Select and Track with Eye Movement
 
 <img src="https://i.imgur.com/yDkzZH8.gif"><br>
 
