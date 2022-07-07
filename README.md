@@ -11,19 +11,19 @@ Trackii - README
 
 ## Overview
 ### Description
-Trackii is a mobile application that provides accessibility for a pdf-reader by tracking the users' eyes.
+Trackii is a mobile application that provides accessibility for a pdf-reader by tracking the users' eyes. This digital app aims to provide an alternative to the physically impaired to read pdfs without needing to interact with the screen for every interaction needed to read a pdf.
 
-Technological progress can only be defined as progress in all directions for all of society, which requires inclusivity. Trackii, aims to inspire and provide solutions to enable more humans to interact with pdfs in a user-friendly manner.
+Technological progress can only be defined as progress in directions for all of society, which requires inclusivity. Trackii's purpose is to inspire and provide solutions to enable more humans to interact with pdfs in a user-friendly manner.
 
 ### App Evaluation
 
 - **Category:** Books and Reference
-- **Mobile:** This app is primarily developed as a mobile application but would be viable as a desktop application or an android application. Functionality and features are not just limited to mobile devices.
+- **Mobile:** This app is primarily developed as a mobile application but would be viable as a desktop application application. Functionality and features are not just limited to mobile devices.
 
-- **Story:** Stores a users e-books through a pdf, and provides optionality to upload new pdfs. User can then open an e-book and allow user to scroll through book and exit reading through use of eyes.
+- **Story:** Stores a users e-books through a pdf, and provides optionality to upload new pdfs. User can then open an e-book and allow user to scroll through book and exit reading through use of eye movement.
 
 - **Market:** Any individual could choose to use and read through this app. Usable for users of all age demographics.
-- **Habit:** This app could be used as often or often as user wants depending on a users physical ability or limitations.
+- **Habit:** This app could be used as often as user wants, depending on a users physical ability or impairments.
 
 - **Scope:** First we would start with selecting a book then we would then calibrate our eye tracking application to prepare for reading. A new windows then would be opened with the e-book to read which can now be controlled with the user’s eyes to scroll and also exit the book.
 
@@ -35,9 +35,9 @@ Technological progress can only be defined as progress in all directions for all
 **Required Must-have Stories**
 
 - User logs in to access already uploaded books or registers an account.
-- User has option to pick a book to read or upload a new book to their list of stored books.
-- When reading a book user can use eyes to look down and up and scroll to bottom or up respectively.
-- When preparing to exit, reader will focus on button and after few miliseconds is exited out of e-book.
+- User has option to pick a book to read 
+- When reading a book/pdf user can use eyes to look down and up and scroll to bottom or up respectively.
+- When reading a book/pdf user can use eyes to zoom in and out based off of location position.
 
 **Optional Nice-to-have Stories**
 
