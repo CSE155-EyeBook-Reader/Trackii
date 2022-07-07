@@ -92,9 +92,11 @@ Login
 <img src="http://g.recordit.co/749EUT7igL.gif"><br>
 
 Select/Upload
-<img src="https://i.imgur.com/kKabBCH.gif" width=6000><br>
+<img src="https://i.imgur.com/kKabBCH.gif" width=4000><br>
+
 
 Select and Track
+<img src="https://i.imgur.com/T9aIp95.gif" width=4000><br>
 
 ## Schema 
 [This section will be completed in Unit 9]
