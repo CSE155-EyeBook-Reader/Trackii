@@ -92,7 +92,7 @@ Login
 <img src="http://g.recordit.co/749EUT7igL.gif"><br>
 
 Select/Upload
-<img src="https://i.imgur.com/kKabBCH.gif" width="600"><br>
+<img src="https://i.imgur.com/kKabBCH.gif" width=6000><br>
 
 Select and Track
 
