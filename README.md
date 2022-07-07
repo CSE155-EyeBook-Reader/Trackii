@@ -89,10 +89,13 @@ Trackii - README
 
 ### [BONUS] Interactive Prototype
 Login
-![](http://g.recordit.co/749EUT7igL.gif)
-![](http://g.recordit.co/lsn0HJogj6.gif)
+<img src="http://g.recordit.co/749EUT7igL.gif"><br>
 
 Select/Upload
+<img src="https://i.imgur.com/kKabBCH.gif" width="600"><br>
+
+Select and Track
+
 ## Schema 
 [This section will be completed in Unit 9]
 ### Models
